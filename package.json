@@ -25,7 +25,8 @@
     "docpad-plugin-tableofcontents": "~2.0.1",
     "docpad-plugin-ghpages": "~2.3.0",
     "docpad-plugin-highlightjs": "~2.1.7",
-    "compass": "~0.1.0"
+    "compass": "~0.1.0",
+    "docpad-plugin-ruby": "~2.0.2"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
