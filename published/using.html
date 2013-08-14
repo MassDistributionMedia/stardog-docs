@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: Using Stardog</title>
+  <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-Powered-By" content="DocPad v6.49.1">
+  <style>html.wait {
+	cursor: wait !important;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+}</style><link rel="stylesheet" href="/css/gumby.css">
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png">
+            
+              <!--
+    	<h3 id="tochead">Using Stardog Contents</h3>
+     -->
+
+<ul class="sidebar-nav">
+    
+    
+    <!-- [data-target='-->
+        <li>
+            <a href="#sd-Querying-a-Database" class="skip" gumby-easing="easeOutQuad" gumby-duration="300" gumby-goto="#sd-Querying-a-Database">
+            <strong>Querying a Database</strong>
+        </a>
+        <!-- <li><a href="#sd-Querying-a-Database" class="skiplink">Querying a Database</a> -->
+            
+                <ul class="sidebar-nav">
+                
+    
+
+                </ul>
+            
+        </li>
+    
+    <!-- [data-target='-->
+        <li>
+            <a href="#sd-Adding-amp--Removing-Data" class="skip" gumby-easing="easeOutQuad" gumby-duration="300" gumby-goto="#sd-Adding-amp--Removing-Data">
+            <strong>Adding &amp; Removing Data</strong>
+        </a>
+        <!-- <li><a href="#sd-Adding-amp--Removing-Data" class="skiplink">Adding &amp; Removing Data</a> -->
+            
+                <ul class="sidebar-nav">
+                
+    
+
+                </ul>
+            
+        </li>
+    
+    <!-- [data-target='-->
+        <li>
+            <a href="#sd-Exporting-a-Database" class="skip" gumby-easing="easeOutQuad" gumby-duration="300" gumby-goto="#sd-Exporting-a-Database">
+            <strong>Exporting a Database</strong>
+        </a>
+        <!-- <li><a href="#sd-Exporting-a-Database" class="skiplink">Exporting a Database</a> -->
+            
+                <ul class="sidebar-nav">
+                
+    
+
+                </ul>
+            
+        </li>
+    
+    <!-- [data-target='-->
+        <li>
+            <a href="#sd-Searching" class="skip" gumby-easing="easeOutQuad" gumby-duration="300" gumby-goto="#sd-Searching">
+            <strong>Searching</strong>
+        </a>
+        <!-- <li><a href="#sd-Searching" class="skiplink">Searching</a> -->
+            
+                <ul class="sidebar-nav">
+                
+    
+
+                </ul>
+            
+        </li>
+    
+
+</ul>
+              <p id="tocnav">
+              
+                <a class="iconlinks" href="/"><i style="padding-left:0px; margin-left:0px;" class="icon-home iconlinks"></i></a>&nbsp;
+              
+              <a href="#" id="" class="skip iconlinks" gumby-easing="easeInOutQuad" gumby-goto="top" gumby-duration="2000">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-publish iconlinks"></i>
+              </a> &nbsp;
+              <a href="https://twitter.com/stardog_db" class="iconlinks">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-twitter iconlinks"></i>
+              </a>
+              </p>
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>The string is a stark data structure and everywhere it is passed there is much duplication of process. It is a perfect vehicle for hiding information.</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">Using Stardog</h1></div>
+            </div>
+          <!-- summary -->
+          
+          <div id="mdblock">
+            <p>While Stardog is a full-featured RDF database, its primary purpose is to
+execute queries against RDF data which it has under direct
+management.<a id="fn-ref-1" href="#footnote-1" class="skip fn-marker" gumby-easing="easeOutQuad" gumby-duration="400" gumby-goto="#footnote-1"><sup>1</sup></a> Stardog supports the <a href="http://www.cambridgesemantics.com/2008/09/sparql-by-example">SPARQL</a> query language, a W3C standard.</p>
+<h2 id="sd-Querying-a-Database">Querying a Database</h2>
+<p>Stardog currently supports all of the <a href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.1 Query
+language</a>. Support is planned for
+<a href="http://www.w3.org/TR/2012/PR-sparql11-update-20121108">SPARQL 1.1 Update</a> in a
+future release. Stardog does not support SPARQL 1.1 federation (the
+<code>SERVICE</code> keyword). Stardog also supports the <a href="http://www.w3.org/TR/2012/CR-sparql11-entailment-20121108/">OWL 2 Direct Semantics
+entailment regime</a>.</p>
+<p>To execute a SPARQL query against a Stardog database, use the <code>query</code>
+subcommand:</p>
+<pre class="highlighted"><code class="bash">$ stardog query myDb <span class="string">"select * where { ?s ?p ?o }"</span></code></pre>
+<p>Detailed information on using the query command in Stardog can be found
+on its <a href="/docs/man/query-execute.html">manpage</a></p>
+<h2 id="sd-Adding-amp--Removing-Data">Adding &amp; Removing Data</h2>
+<p>The most efficient way to load data into Stardog is at database creation
+time. See the <a href="../admin/#create">Creating a Database</a> section for bulk
+loading data at database creation time. To add data to an existing
+Stardog database, use the <a href="/docs/man/data-add.html">add</a> command:</p>
+<pre class="highlighted"><code class="bash">$ stardog data add myDatabase 1.rdf 2.rdf 3.rdf</code></pre>
+<p>The optional arguments are <code>-f</code> (or <code>--format</code>) to specify the RDF
+serialization type of the files to be loaded; if you specify the wrong
+type, <code>add</code> will fail. If you don't specify a type, Stardog will try to
+determine the type on its own based on the file extension. For example,
+the files that have names ending with '.ttl' will be parsed with Turtle
+syntax. If you specify a type, then all the files being loaded must of
+that same type.</p>
+<p>If you want to add data to a named graph, specify it via the
+<code>--graph-uri</code> or <code>-g</code> options.</p>
+<p>To remove data from a Stardog database,
+<a href="/docs/man/data-remove.html">remove</a> is used by specifying—</p>
+<ol>
+<li>one Named Graph, OR</li>
+<li>one or more files containing RDF (in some recognized serialization
+format, i.e., RDF/XML, Turtle, Trig), OR</li>
+<li>one Named Graph and one or more RDF files.</li>
+</ol>
+<p>For example,</p>
+<pre class="highlighted"><code class="bash">$ stardog data remove -g http://foo myDatabase</code></pre>
+<p>will remove the named graph <code>http://foo</code> and all its triples from
+<code>myDatabase</code>.</p>
+<pre class="highlighted"><code class="bash">$ stardog data remove myDatabase 1.rdf</code></pre>
+<p>will remove the triples in <code>1.rdf</code> from (the default graph of)
+<code>myDatabase</code>.</p>
+<pre class="highlighted"><code class="bash">$ stardog data remove -g http://foo -f TURTLE myDatabase 2.rdf 3.rdf</code></pre>
+<p>will remove the triples in the Turtle files <code>2.rdf</code> and <code>3.rdf</code> from the
+named graph <code>http://foo</code> of <code>myDatabase</code>.</p>
+<p>Strict or loose parsing may be set for the input payload by using
+<code>--strict-parsing=TRUE|FALSE</code>.</p>
+<h3>How Stardog Handles RDF Parsing</h3>
+<p>RDF parsing in Stardog is strict: it requires typed RDF literals to
+match their explicit datatypes, URIs to be well-formed, etc. In some
+cases, strict parsing isn't ideal, so it may be disabled using the
+<code>--strict-parsing=FALSE</code> to disable it.</p>
+<p>However, even with strict parsing disabled, Stardog's RDF parser may
+encounter parse errors from which it cannot recover. And loading data in
+lax mode may lead to unexpected SPARQL query results. For example,
+malformed literals (<code>"2.5"^^xsd:int</code>) used in filter evaluation may lead
+to undesired results.</p>
+<h2 id="sd-Exporting-a-Database">Exporting a Database</h2>
+<p>To export data from a Stardog database back to RDF,
+<a href="/docs/man/data-export.html">export</a> is used by specifying—</p>
+<ol>
+<li>the connection string of the database to export</li>
+<li>the export format: <code>N-TRIPLES, RDFXML, TURTLE, TRIG</code>. default is
+'N-TRIPLES'— 'TRIG' must be used when exporting the entire database
+if the database contains triples inside named graphs.</li>
+<li>optionally, the URI of the named graph to export if you wish to
+export a single named graph only.</li>
+<li>the file to export to</li>
+</ol>
+<p>For example,</p>
+<pre class="highlighted"><code class="bash">$ stardog data export --format TURTLE myDatabase myDatabase_output.ttl
+
+$ stardog data export --graph-uri http://example.org/context myDatabase myDatabase_output.nt</code></pre>
+<h2 id="sd-Searching">Searching</h2>
+<p>Stardog includes an RDF-aware semantic search capability: it will index
+RDF literals and supports information retrieval-style queries over
+indexed data.</p>
+<h3>Indexing Strategy</h3>
+<p>The indexing strategy creates a "search document" per RDF literal. Each
+document consists of the following fields: literal ID; literal value;
+and contexts.</p>
+<h3>Search in SPARQL</h3>
+<p>We use the predicate <code>http://jena.hpl.hp.com/ARQ/property#textMatch</code> to
+access the search index in a SPARQL query.</p>
+<p>For example,</p>
+<pre class="highlighted"><code class="bash">SELECT DISTINCT ?s ?score 
+WHERE {
+?s ?p ?l.
+( ?l ?score ) &lt;http://jena.hpl.hp.com/ARQ/property<span class="comment">#textMatch&gt; ( 'mac' 0.5 50 ). </span>
+}</code></pre>
+<p>This query selects the top 50 literals, and their scores, which match
+'mac' and whose scores are above a threshold of 0.5. These literals are
+then joined with the generic BGP <code>?s ?p ?l</code> to get the resources (?s)
+that have those literals. Alternatively, you could use
+<code>?s rdf:type ex:Book</code> if you only wanted to select the books which
+reference the search criteria; you can include as many other BGP's as
+you like to enhance your initial search results.</p>
+<h3>Searching with the Command Line</h3>
+<p>First, check out the CLI help for the
+<a href="/docs/man/query-search.html">search</a> subcommand:</p>
+<pre class="highlighted"><code class="bash">$ stardog help query search</code></pre>
+<p>Okay, now let's do a search over the O'Reilly book catalog in RDF for
+everything mentioning "html":</p>
+<pre class="highlighted"><code class="bash">$ stardog query search -q <span class="string">"html"</span> -l 10 catalog</code></pre>
+<p>The results?</p>
+<pre class="highlighted"><code class="bash">Index    Score    Hit
+====================
+0    6.422    urn:x-domain:oreilly.com:product:9780596527402.IP
+1    6.422    urn:x-domain:oreilly.com:product:9780596003166.IP
+2    6.422    urn:x-domain:oreilly.com:product:9781565924949.IP
+3    6.422    urn:x-domain:oreilly.com:product:9780596002251.IP
+4    6.422    urn:x-domain:oreilly.com:product:9780596101978.IP
+5    6.422    urn:x-domain:oreilly.com:product:9780596154066.IP
+6    6.422    urn:x-domain:oreilly.com:product:9780596157616.IP
+7    6.422    urn:x-domain:oreilly.com:product:9780596805876.IP
+8    6.422    urn:x-domain:oreilly.com:product:9780596527273.IP
+9    6.422    urn:x-domain:oreilly.com:product:9780596002961.IP</code></pre>
+<h3>Query Syntax</h3>
+<p>Stardog search is based on Lucene 4.2.0: we support all of the <a href="http://lucene.apache.org/java/3_4_0/queryparsersyntax.html">search
+modifiers</a>
+that Lucene supports, with the exception of fields.</p>
+<ul>
+<li>wildcards: <code>?</code> and <code>*</code></li>
+<li>fuzzy: <code>~</code> and <code>~</code> with similarity weights (e.g. <code>foo~0.8</code>)</li>
+<li>proximities: <code>"semantic web"~5</code></li>
+<li>term boosting</li>
+<li>booleans: <code>OR</code>, <code>AND</code>, <code>+</code>, <code>NOT</code>, and <code>-</code>.</li>
+<li>grouping</li>
+</ul>
+<p>For a more detailed discussion, see the <a href="http://lucene.apache.org/java/3_3_0/queryparsersyntax.html">Lucene
+docs</a>.</p>
+
+          </div>
+          <div class="" id="footnote-container" style="display: block;">
+            <h2>Notes</h2>
+          <div class="footnote" id="footnote-1"><p>1. This implies that Stardog will not retrieve data from the Web
+or from any other network via HTTP URLs in order to query that data. If
+you want to query data using Stardog, you must add that data to a new or
+existing Stardog database. A future version of Stardog will
+support <a href="http://weblog.clarkparsia.com/2011/03/07/sdq-information-integration-i%0An-the-real-world/">SDQ</a>, a distributed query system, that will lift this restriction.<a class="skip fn-marker" gumby-easing="easeOutQuad" gumby-duration="400" gumby-goto="#fn-ref-1">&nbsp;&#8618;</a></p></div></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">Using Stardog</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </p></div>
+        </div>
+      </section>
+</div>
+
+<script>(function(){
+	/* Did we just livereload? */
+var log = !!(localStorage && console && console.log && true);
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReload completed at', new Date())
+}
+
+/* Listen for the regenerated event and perform a reload of the page when the event occurs */
+var listen = function(){
+	var primus = new Primus('/docpad-livereload');
+	primus.on('data', function(data){
+		if ( data && data.message ) {
+			if ( data.message === 'generateBefore' ) {
+				if ( log ) {
+					console.log('LiveReload started at', new Date());
+				}
+				if ( typeof document.getElementsByTagName !== 'undefined' ) {
+	document.getElementsByTagName('html')[0].className += ' wait';
+}
+			}
+			else if ( data.message === 'generateAfter' ) {
+				if ( log ) {
+					localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+				}
+				document.location.reload();
+			}
+		}
+	});
+};
+	/* Inject socket into our page */
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = 'async';
+	t.src = '/primus/primus.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t, s);
+};
+	if ( typeof Primus !== 'undefined' ) {
+		listen();
+	} else {
+		inject();
+	}
+})();</script><script defer="defer" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer" src="/js/libs/gumby.js"></script><script defer="defer" src="/js/libs/ui/gumby.fittext.js"></script><script defer="defer" src="/js/libs/ui/gumby.fixed.js"></script><script defer="defer" src="/js/libs/ui/gumby.navbar.js"></script><script defer="defer" src="/js/libs/ui/gumby.retina.js"></script><script defer="defer" src="/js/libs/ui/gumby.skiplink.js"></script><script defer="defer" src="/js/libs/ui/gumby.tabs.js"></script><script defer="defer" src="/js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer" src="/js/libs/gumby.init.js"></script><script defer="defer" src="/js/plugins.js"></script><script defer="defer" src="/js/main.js"></script>
+
+</body>
+
+</html>
