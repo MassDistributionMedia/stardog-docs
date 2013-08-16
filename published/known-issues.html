@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: Known Issues</title>
+  <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-Powered-By" content="DocPad v6.49.0">
+  <link rel="stylesheet" href="/css/gumby.css">
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png">
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>We kid ourselves if we think that the ratio of procedure to data in an active data-base system can be made arbitrarily small or even kept small.</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">Known Issues</h1></div>
+            </div>
+          <!-- summary -->
+          
+          <div id="mdblock">
+            <p>The known issues in Stardog 2.0.0—</p>
+<ol>
+<li>Stardog doesn&#39;t support SPARQ 1.1 UPDATE query
+ language, federation, UPDATE protocol (but the HTTP protocol support is a superset of SPARQL 1.1 UPDATE protocol anyway), or any entailment regimes other than
+ OWL 2 Direct Semantics. <strong>WILLFIX</strong></li>
+<li>Our <code>CONSTRUCT</code> slightly deviates from <a href="http://www.w3.org/TR/sparql11-query/#construct">SPARQL 1.1 specification</a> in that it does not implicitly <code>DISTINCT</code> query results; rather, it implicitly applies <code>REDUCED</code> semantics to <code>CONSTRUCT</code> query results.<a id="fn-ref-1" href="#footnote-1" class="skip fn-marker" gumby-easing="easeOutQuad" gumby-duration="400" gumby-goto="#footnote-1"><sup>1</sup></a></li>
+<li>Asking for all individuals with reasoning via the query
+<code>{?s a owl:Thing}</code> might also retrieve some classes and properties.
+<strong>WILLFIX</strong></li>
+<li>Schema queries do not bind graph variables.</li>
+<li>Dropping a database with the CLI deletes all of the data files
+in Stardog Home associated with that database. If you
+want to keep the data files and remove the database from the
+system catalog, then you need to manually copy these files to
+another location before deleting the database.</li>
+<li>If relative URIs exist in the data files passed to create, add, or
+remove commands, then they will be resolved using the constant base
+URI <code>http://api.stardog.com/</code> iff the format of the file allows base
+URIs. Turtle and RDF/XML formats allows base URIs but N-Triples
+format doesn&#39;t allow base URIs and relative URIs in N-Triples data
+will cause errors.</li>
+<li>Queries with <code>FROM NAMED</code> with a named graph that is <em>not</em> in
+Stardog will <strong>not</strong> cause Stardog to believe that it is, in fact,
+Maven, i.e., to automagically download the data from an arbitrary
+HTTP URL and include it in the query. Stardog will <em>only</em> evaluate
+queries over data that has been loaded into it.</li>
+<li>SPARQL queries without a context or named graph are executed against
+the default, unnamed graph. In Stardog, the default graph is <em>not</em>
+the union of all the named graphs and the default graph. Note: this
+behavior is configurable via the <code>query.all.graphs</code> configuration
+parameter.</li>
+<li>RDF literals are limited to 8MB (after compression) in Stardog.
+Input data with literals larger than 8MB (after compression) will
+raise an exception.</li>
+</ol>
+
+          </div>
+          <div class="" id="footnote-container" style="display: block;">
+            <h2>Notes</h2>
+          <div class="footnote" id="footnote-1"><p>1. Strictly speaking, this is a Sesame parser deviation from the SPARQL 1.1 spec with which we happen to agree.<a class="skip fn-marker" gumby-easing="easeOutQuad" gumby-duration="400" gumby-goto="#fn-ref-1">&nbsp;&#8618;</a></p></div></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">Known Issues</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </p></div>
+        </div>
+      </section>
+</div>
+
+<script defer="defer" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer" src="/js/libs/gumby.js"></script><script defer="defer" src="/js/libs/ui/gumby.fittext.js"></script><script defer="defer" src="/js/libs/ui/gumby.fixed.js"></script><script defer="defer" src="/js/libs/ui/gumby.navbar.js"></script><script defer="defer" src="/js/libs/ui/gumby.retina.js"></script><script defer="defer" src="/js/libs/ui/gumby.skiplink.js"></script><script defer="defer" src="/js/libs/ui/gumby.tabs.js"></script><script defer="defer" src="/js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer" src="/js/libs/gumby.init.js"></script><script defer="defer" src="/js/plugins.js"></script><script defer="defer" src="/js/main.js"></script>
+
+</body>
+
+</html>
