@@ -132,6 +132,8 @@ docpadConfig = {
         # Unless, enableUnlistedPlugins is set to false, all plugins are enabled by default
         digimon: true
         frontmatter: false
+        tableofcontents: false
+        nodesass: false
 
     # Configure Plugins
     # Should contain the plugin short names on the left, and the configuration to pass the plugin on the right
@@ -148,6 +150,10 @@ docpadConfig = {
             headerIdPrefix: "sd-"
             headerSelectors: "h2"
         watchOptions: preferredMethods: ['watchFile','watch']
+        sass:
+            sassPath: 'E:\Ruby200-x64\bin\sass.bat'
+            scssPath: 'E:\Ruby200-x64\bin\scss.bat'
+            compass: 'E:\Ruby200-x64\bin\compass.bat'
 
     # =================================
     # Event Configuration
@@ -191,7 +197,7 @@ docpadConfig = {
             prompts: process.argv.length >= 2 and /docpad$/.test(process.argv[1])  # default
 
             # Listen to port 9005 on the development environment
-            port: 9005  # example
+            port: 80  # example
 }
 
 # Export the DocPad Configuration

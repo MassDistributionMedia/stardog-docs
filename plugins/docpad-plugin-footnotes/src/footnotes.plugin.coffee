@@ -93,6 +93,6 @@ module.exports = (BasePlugin) ->
       # loop over just the html files in the resulting collection
       docpad.getCollection('html').sortCollection(date:9).forEach (document) ->
         document.attributes.contentRendered = processFootnotes document
-        processDocStructure document
+        #processDocStructure document
       # Done, let DocPad proceed
       next()
