@@ -7,9 +7,17 @@
     "npm": "1.2"
   },
   "dependencies": {
-    "docpad": "~6.49.0",
-    "docpad-plugin-sass": "~2.6.0",
+    "docpad": "~6.49.1",
+    "docpad-plugin-cleanurls": "~2.5.0",
+    "docpad-plugin-eco": "~2.0.2",
     "docpad-plugin-ghpages": "~2.3.0"
+    "docpad-plugin-gist": "~2.1.1",
+    "docpad-plugin-highlightjs": "~2.1.7",
+    "docpad-plugin-marked": "~2.1.1",
+    "docpad-plugin-partials": "~2.7.2",
+    "docpad-plugin-sass": "~2.6.0",
+    "docpad-plugin-text": "~2.2.4",
+    "docpad-plugin-coffeescript": "~2.2.2",
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {

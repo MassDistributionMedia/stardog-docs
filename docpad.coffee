@@ -128,6 +128,7 @@ docpadConfig = {
         # Disable the Pokemon Plugin
         pokemon: false
         footnotes: true
+        highlightjs: false
         # Enable the Digimon Plugin
         # Unless, enableUnlistedPlugins is set to false, all plugins are enabled by default
         digimon: true
