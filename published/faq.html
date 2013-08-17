@@ -1,10 +1,156 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>FAQ</title>
-		<meta http-equiv="REFRESH" content="0;url=/faq">
-	</head>
-	<body>
-		This page has moved. You will be automatically redirected to its new location. If you aren't forwarded to the new page, <a href="/faq">click here</a>.
-	</body>
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: FAQ</title>
+  <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-Powered-By" content="DocPad v6.49.1"/>
+  <link  rel="stylesheet" href="css/gumby.css" />
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png"/>
+            
+              
+
+<ol class="toc">
+    
+</ol>
+
+              <p id="tocnav">
+              
+                <a  class="iconlinks" href="/"><i style="padding-left:0px; margin-left:0px;" class="icon-home iconlinks"></i></a>&nbsp;
+              
+              <a href="#" id="" class="skip iconlinks" gumby-easing="easeInOutQuad" gumby-goto="top" gumby-duration="2000">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-publish iconlinks"></i>
+              </a> &nbsp;
+              <a href="https://twitter.com/stardog_db" class="iconlinks">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-twitter iconlinks"></i>
+              </a>
+              </p>
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>Software is under a constant tension. Being symbolic it is arbitrarily perfectible; but also it is arbitrarily changeable.</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">FAQ</h1></div>
+            </div>
+          <!-- summary -->
+          
+          <div id="mdblock">
+            <p>Some frequently asked questions for which we have answers.</p>
+<h2>SPARQL 1.1</h2>
+<p><strong>Question:</strong> Does Stardog support SPARQL 1.1?</p>
+<p><strong>Answer:</strong> Yes. As of Stardog 1.1 (released 14 November 2012), Stardog
+supports SPARQL 1.1. However, there are still a few odds and ends of
+SPARQL 1.1 that we don&#39;t yet support.</p>
+<p><strong>Revised Answer:</strong> Stardog 2.0 supports SPARQL 1.1 protocol and query language, including updates.</p>
+<h2>Deadlocks and Slowdowns</h2>
+<p><strong>Question:</strong> Stardog slows down or deadlocks?! I don‘t understand why,
+I’m just trying to send some queries and do something with the
+results…in a tight inner loop of doom!</p>
+<p><strong>Answer:</strong> Make sure you are closing result sets (<code>TupleQueryResult</code>
+and <code>GraphQueryResult</code>; or the Jena equivalents) when you are done with
+them. These hold open resources both on the client and on the server and
+failing to close them when you are done will cause files, streams,
+lions, tigers, and bears to be held open. If you do that enough, then
+you&#39;ll eventually exhaust all of the resources in their respective
+pools, which can cause slowness or, in some cases, deadlocks waiting for
+resources to be returned to their pools.</p>
+<p>Similarly close your connections when you are done with them. Failing to
+close Connections, Iterations, QueryResults, and other <em>closeable</em>
+objects will lead to undesirable behavior.</p>
+<h2>Bulk Update Performance</h2>
+<p><strong>Question:</strong> I&#39;m adding one triple at a time, in a tight loop, to
+Stardog; is this the ideal strategy with respect to performance?</p>
+<p><strong>Question:</strong> I‘m adding millions of triples to Stardog and I’m
+wondering it that&#39;s the best approach?</p>
+<p><strong>Answer:</strong> The answer to both questions is to stop doing that…</p>
+<p>In other words, there is a sweet spot for Stardog bulk update
+performance. The best performance for writes isn&#39;t found by
+parsimoniously writing only one or a few triples at a time; or, on the
+other end of the spectrum, holding writes till there are millions of
+triples. Generally update performance is best if you write between 1k
+and 100k triples at a time. You may need to experiment to find the sweet
+spot with respect to your data, database size, the size of the
+differential index, and update frequency.</p>
+<h2>Public Endpoint</h2>
+<p><strong>Question:</strong> I want to use Stardog to serve a public SPARQL endpoint;
+is there some way I can do this without publishing user account
+information?</p>
+<p><strong>Answer:</strong> We don‘t necessarily recommend this, but it’s possible.
+Simply pass <code>--disable-security</code> to <code>stardog-admin</code> when you start the
+Stardog Server; while this may be the worst possible name for an
+argument, since it doesn&#39;t actually disable security, it will use the
+built-in anonymous user (given the default configuration and user
+accounts) in a way that makes Stardog usable for a public endpoint.</p>
+<h2>Remote Bulk Loading</h2>
+<p><strong>Question:</strong> I‘m trying to create a database and bulk load files from
+my machine to the server and it’s not working, the files don&#39;t seem to
+load, what gives?</p>
+<p><strong>Answer:</strong> Stardog does not tranfser files during database creation to
+the server, sending big files over a network kind of defeats the purpose
+of blazing fast bulk loading. If you want to bulk load files from your
+machine to a remote server, copy them to the server and bulk load them.</p>
+
+          </div>
+          <div class="hidden" id="footnote-container">
+            <h2>Notes</h2>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">FAQ</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </div>
+        </div>
+      </section>
+</div>
+
+<script defer="defer"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer"  src="js/libs/gumby.js"></script><script defer="defer"  src="js/libs/ui/gumby.fittext.js"></script><script defer="defer"  src="js/libs/ui/gumby.fixed.js"></script><script defer="defer"  src="js/libs/ui/gumby.navbar.js"></script><script defer="defer"  src="js/libs/ui/gumby.retina.js"></script><script defer="defer"  src="js/libs/ui/gumby.skiplink.js"></script><script defer="defer"  src="js/libs/ui/gumby.tabs.js"></script><script defer="defer"  src="js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer"  src="js/libs/gumby.init.js"></script><script defer="defer"  src="js/plugins.js"></script><script defer="defer"  src="js/main.js"></script>
+
+</body>
+
 </html>

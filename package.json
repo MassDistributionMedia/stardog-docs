@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "New DocPad project without using a skeleton",
   "engines": {
-    "node": "0.10",
-    "npm": "1.2"
+    "node": ">=0.10",
+    "npm": ">=1.2"
   },
   "dependencies": {
     "docpad": "~6.49.1",

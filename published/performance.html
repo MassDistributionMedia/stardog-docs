@@ -1,10 +1,176 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Performance</title>
-		<meta http-equiv="REFRESH" content="0;url=/performance">
-	</head>
-	<body>
-		This page has moved. You will be automatically redirected to its new location. If you aren't forwarded to the new page, <a href="/performance">click here</a>.
-	</body>
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: Performance</title>
+  <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-Powered-By" content="DocPad v6.49.1"/>
+  <link  rel="stylesheet" href="css/gumby.css" />
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png"/>
+            
+              
+
+<ol class="toc">
+    
+</ol>
+
+              <p id="tocnav">
+              
+                <a  class="iconlinks" href="/"><i style="padding-left:0px; margin-left:0px;" class="icon-home iconlinks"></i></a>&nbsp;
+              
+              <a href="#" id="" class="skip iconlinks" gumby-easing="easeInOutQuad" gumby-goto="top" gumby-duration="2000">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-publish iconlinks"></i>
+              </a> &nbsp;
+              <a href="https://twitter.com/stardog_db" class="iconlinks">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-twitter iconlinks"></i>
+              </a>
+              </p>
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>In computing, the mean time to failure keeps getting shorter.</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">Performance</h1></div>
+            </div>
+          <!-- summary -->
+          
+            <p id="summary"><em>In this chapter, we'll detail some basic performance numbers for Stardog, both load speed and query speed. As is always the case, the most important performance numbers are the ones you run on <strong>your</strong> data.</em></p>
+          
+          <div id="mdblock">
+            <h2>Performance Tuning, Tips, Tricks</h2>
+<p>See the following:</p>
+<ol>
+<li>basic approach: Stardog is read-biased; we will trade some slowdowns in writes for proportional (or greater, ideally) speedups in reads</li>
+<li>capacity planning</li>
+<li>bulk data loading guidelines</li>
+<li>FAQ</li>
+<li>if you can do without quads, do w/out them</li>
+<li>use the tightest reasoning level appropriate to yr use cases</li>
+</ol>
+<h2>Loading RDF</h2>
+<p>When Stardog creates a database, you can provide RDF to be bulk loaded
+into the database. This is the optimal way to insert large amounts of
+data into Stardog. We provide some <a href="../admin/#resource-requirements">basic
+guidelines</a> for the resources required
+to bulk load large amounts of data.</p>
+<p>Server1: 2 x Six-core AMD Opteron 2439SE @ 2.8 GHz 32 GB RAM, RAID 0
+(striping) array of 4 x 750GB hard drives at 7200 rpm. EC2 is a
+<a href="http://aws.amazon.com/ec2/instance-types/">High-Memory Quad XL
+instance</a>.</p>
+<h2>SP2B Results</h2>
+<p>The <a href="http://dbis.informatik.uni-freiburg.de/index.php?project=SP2B">SP2B</a>
+benchmark builds on DBLP attempting to create real-world queries which
+utilize many different aspects of SPARQL query performance. It&#39;s an
+excellent torture test for a SPARQL engine as <a href="http://arxiv.org/pdf/0806.4627v2.pdf">evidenced in their
+initial results</a>. Stardog performs
+quite well on SP2B which we believe is indicative of our focus on query
+performance, particularly for difficult, analytic type SPARQL queries.</p>
+<p>For reference, our earlier SP2B numbers can be seen
+<a href="http://weblog.clarkparsia.com/2011/05/31/stardog-performance-sp2b-benchmark/">here</a>.</p>
+<p>All SP2B numbers were collected on an iMac running OSX 10.6.8 2.8Ghz
+Intel i7. The default Stardog configuration was used, except the process
+was given 8G of RAM. Each query was run 5 times for a warmup and the
+average was then collected over 25 additional executions of the query.
+Execution times include parsing, planning, and optimization, but do not
+include any result serialization; the embedded Stardog server was used
+so the results were not serialized over the wire. Query times are in
+<strong>milliseconds</strong>, so our result for Q4 @ 5M is 64,435.25 <strong>ms</strong>, or just
+over 1 minute.</p>
+<p>Query 5a did not produce results within the 1 hr timeout (T) specified
+in the original study, nor did query 4 at 25M.</p>
+<h2>BSBM Results</h2>
+<p>The <a href="http://www4.wiwiss.fu-berlin.de/bizer/berlinsparqlbenchmark/">BSBM SPARQL benchmark</a>
+uses generated data based on an e-commerce use case; the data set is
+comprised of a set of products and vendor &amp; consumer information, such
+as reviews, about the products. BSBM uses a set of queries called a
+query mix based around a search and navigation pattern of a consumer
+looking for a product.</p>
+<p>The last results published by the BSBM authors are
+<a href="http://www4.wiwiss.fu-berlin.de/bizer/BerlinSPARQLBenchmark/results/V6/">available</a>.
+Other database vendors have published their own numbers independently
+since the last study and are available online.</p>
+<p>Our BSBM numbers reflect the full query mix using the same seed to
+generate the data sets as provided in the last published BSBM results.
+The numbers in the table represent the query mixes per hour (QMpH) as
+reported by the BSBM test driver. 25 Warmups were executed followed by
+100 runs, this was repeated 5 times and the average QMpH was taken for
+each. 300 runs were used for 128 &amp; 255 concurrent clients to ensure that
+each thread was utilized at least once for a run.</p>
+<p>Hardware used in tests as follows:</p>
+<ul>
+<li>Dev1 is an iMac running OSX 10.6.8 2.8Ghz Intel i7, 16G RAM</li>
+<li>Dev2 is a Linux box CPU: i7-3930K @ 3.2 GHz six cores,
+hyperthreading, 32 GB RAM, SSD SATA 3 HD</li>
+<li>Server is a Linux box: 2 x Intel Xeon X5650 @ 2.67 Ghz. each CPU is
+6 cores with hyperthreading, 48 GB RAM.</li>
+<li>EC2 is a <a href="http://aws.amazon.com/ec2/instance-types/">High-Memory Double XL
+instance</a>.</li>
+</ul>
+<p>Tests were run with 4G of RAM allocated to the JVM unless noted
+otherwise. 128 &amp; 255 client tests were not run on Dev1 because of issues
+with the ulimit &amp; the max number of open sockets.</p>
+
+          </div>
+          <div class="hidden" id="footnote-container">
+            <h2>Notes</h2>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">Performance</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </div>
+        </div>
+      </section>
+</div>
+
+<script defer="defer"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer"  src="js/libs/gumby.js"></script><script defer="defer"  src="js/libs/ui/gumby.fittext.js"></script><script defer="defer"  src="js/libs/ui/gumby.fixed.js"></script><script defer="defer"  src="js/libs/ui/gumby.navbar.js"></script><script defer="defer"  src="js/libs/ui/gumby.retina.js"></script><script defer="defer"  src="js/libs/ui/gumby.skiplink.js"></script><script defer="defer"  src="js/libs/ui/gumby.tabs.js"></script><script defer="defer"  src="js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer"  src="js/libs/gumby.init.js"></script><script defer="defer"  src="js/plugins.js"></script><script defer="defer"  src="js/main.js"></script>
+
+</body>
+
 </html>

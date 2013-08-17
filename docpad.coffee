@@ -61,20 +61,20 @@ docpadConfig = {
         site:
             scripts: [
                       "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
-                      "/js/libs/gumby.js"
-                      "/js/libs/ui/gumby.fittext.js"
-                      "/js/libs/ui/gumby.fixed.js"
-                      "/js/libs/ui/gumby.navbar.js"
-                      "/js/libs/ui/gumby.retina.js"
-                      "/js/libs/ui/gumby.skiplink.js"
-                      "/js/libs/ui/gumby.tabs.js"
-                      "/js/libs/ui/gumby.toggleswitch.js"
-                      "/js/libs/gumby.init.js"
-                      "/js/plugins.js"
-                      "/js/main.js"
+                      "js/libs/gumby.js"
+                      "js/libs/ui/gumby.fittext.js"
+                      "js/libs/ui/gumby.fixed.js"
+                      "js/libs/ui/gumby.navbar.js"
+                      "js/libs/ui/gumby.retina.js"
+                      "js/libs/ui/gumby.skiplink.js"
+                      "js/libs/ui/gumby.tabs.js"
+                      "js/libs/ui/gumby.toggleswitch.js"
+                      "js/libs/gumby.init.js"
+                      "js/plugins.js"
+                      "js/main.js"
                       ]
             styles: [
-                      "/css/gumby.css"
+                      "css/gumby.css"
                      ]
             # The production url of our website
             url: "http://docs.stardog.com/"
@@ -155,6 +155,83 @@ docpadConfig = {
             sassPath: 'E:\Ruby200-x64\bin\sass.bat'
             scssPath: 'E:\Ruby200-x64\bin\scss.bat'
             compass: 'E:\Ruby200-x64\bin\compass.bat'
+        stardogtoc:
+            chapters: [   # Define chapters
+                title: "Using Stardog"
+                subtitle: "Covers basic installation and starting a Stardog Server in <em>five easy steps</em>."
+                sections: [
+                  title: "The Basics: Query, Write, Search"
+                  page: "using"
+                ,
+                  title: "Stardog (Web) Console"
+                  page: "console"
+                ]
+              ,
+                title: "Administering Stardog"
+                subtitle: "Administering Stardog Server, databases, including configuration and deployment information."
+                sections: [
+                  title: "Administration"
+                  page: "admin"
+                ,
+                  title: "Security"
+                  page: "security"
+                ]
+              ,
+                title: "Programming Stardog"
+                subtitle: "Everything from reasoning, data validation, and SPARQL to programming Stardog with Java, JavaScript, and many other languages. Includes the documentation for Stardog Web."
+                sections: [
+                  title: "Programming with Java"
+                  page: "java"
+                ,
+                  title: "Building Stardog Web Apps"
+                  page: "web"
+                ,
+                  title: "Integrity Constraint Validation"
+                  page: "icv"
+                ,
+                  title: "OWL 2 Reasoning"
+                  page: "owl2"
+                ,
+                  title: "HTTP Programming"
+                  page: "http"
+                ,
+                  title: "Programming with Spring"
+                  page: "spring"
+                ,
+                  title: "Programming with Groovy"
+                  page: "groovy"
+                ,
+                  title: "Programming with Javascript"
+                  page: false
+                  text: "The documentation for <a href=\"http://clarkparsia.github.io/stardog.js\">stardog.js</a>, which is available on <a href=\"https://github.com/clarkparsia/stardog.js\">Github</a> and <a href=\"http://docs.stardog.com/\">npm</a>."
+                ]
+              ,
+                title: "Understanding Stardog"
+                subtitle: "Background information on tuning, terminology, known issues, compatibility policies, etc."
+                sections: [
+                  title: "The Man Pages"
+                  page: "manpages"
+                ,
+                  title: "Stardog Performance: Benchmarks, Tuning, Tips"
+                  page: "performance"
+                ,
+                  title: "Frequently Asked Questions"
+                  page: "faq"
+                ,
+                  title: "Stardog Compatibility Policies"
+                  page: false
+                  text: "A statement of the policies we will pursue in evolving Stardog beyond the 1.0 release."
+                ,
+                  title: "Known Issues"
+                  page: false
+                  text: "Click here first before reporting an issue or bug."
+                ,
+                  title: "Terminology"
+                  page: false
+                  text: "A glossary of technical terms used in these docs."
+                ]
+              ]
+
 
     # =================================
     # Event Configuration
