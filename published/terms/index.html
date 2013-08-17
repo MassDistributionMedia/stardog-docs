@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: Terminology</title>
+  <script src="/js/libs/modernizr-2.6.2.min.js"></script>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-Powered-By" content="DocPad v6.49.1"/>
+  <link  rel="stylesheet" href="/css/gumby.css" />
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png"/>
+            
+              
+
+<ol class="toc">
+    
+</ol>
+
+              <p id="tocnav">
+              
+                <a  class="iconlinks" href="/"><i style="padding-left:0px; margin-left:0px;" class="icon-home iconlinks"></i></a>&nbsp;
+              
+              <a href="#" id="" class="skip iconlinks" gumby-easing="easeInOutQuad" gumby-goto="top" gumby-duration="2000">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-publish iconlinks"></i>
+              </a> &nbsp;
+              <a href="https://twitter.com/stardog_db" class="iconlinks">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-twitter iconlinks"></i>
+              </a>
+              </p>
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>It's difficult to extract sense from strings, but they're the only communication coin we can count on.</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">Terminology</h1></div>
+            </div>
+          <!-- summary -->
+          
+          <div id="mdblock">
+            <p>In the Stardog documentation, the following terms have a specific
+technical meaning.</p>
+<p><strong>Stardog Database Management System, aka Stardog Server, aka Stardog</strong>: An instance of Stardog; only one Stardog Server may run per JVM. A computer may run multiple Stardog Servers by running one per multiple JVMs.</p>
+<p><strong> Stardog Home, aka <code>STARDOG_HOME</code></strong>: A directory in a filesystem in which Stardog stores files and other information; established either in a Stardog configuration file or
+by environment variable. Only one Stardog Server may run
+simultaneously from a <code>STARDOG_HOME</code>.</p>
+<p><strong>Stardog Network Home</strong>:   A URL (HTTP or SNARL) which identifies a Stardog Server running on the network.</p>
+<p><strong>Database</strong>: A Stardog database is a graph of RDF data under management of a
+Stardog Server. It may contain zero or more RDF Named Graphs. A
+Stardog Server may manage more than one Database; there is no hard
+limit, and the practical limit is disk space.</p>
+<p><strong>Database Short Name, aka Database Name</strong>:   An identifier used to name a database, provided as input when a database is created.</p>
+<p><strong>Database Network Name</strong>: A Database Short Name is part of the URI of a Database addressed over some network protocol.</p>
+<p><strong>Index</strong>:   The unit of persistence for a Database. We sometimes (sloppily) use
+Database and Index interchangeably in the Stardog docs.</p>
+<p><strong>Memory Database</strong>: A Database may be stored in-memory or on disk; a Memory Database is
+read entirely into system memory but can be (optionally) persisted to disk.</p>
+<p><strong>Disk Database</strong>:  A Disk Database is only paged into system memory as needed and is
+persisted using one or more indexes.</p>
+<p><strong>Connection String</strong>: An identifier (a restricted subset of legal URLs, actually) that is used to connect to a Stardog database to send queries or perform other operations.</p>
+<p><strong>Named Graph</strong>:   A Named Graph is an explicitly named unit of data within a Database.
+Named Graphs are queries explicitly by specifying them in SPARQL
+queries. There is no practical limit on the number of Named Graphs
+in a Database.</p>
+<p><strong>Default Graph</strong>:   The Default Graph in a Database is the context into which RDF
+triples are stored when a Named Graph is not explicitly specified. A
+SPARQL query executed by Stardog that does not contain any Named
+Graph statements is executed against the data in the Default Graph
+only.</p>
+<p><strong>Security Realm</strong>:   A Security Realm defines the users and their permissions for each
+Database in an Stardog Server. There is only one Security Realm per
+Stardog Server.</p>
+
+          </div>
+          <div class="hidden" id="footnote-container">
+            <h2>Notes</h2>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">Terminology</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </div>
+        </div>
+      </section>
+</div>
+
+<script defer="defer"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer"  src="/js/libs/gumby.js"></script><script defer="defer"  src="/js/libs/ui/gumby.fittext.js"></script><script defer="defer"  src="/js/libs/ui/gumby.fixed.js"></script><script defer="defer"  src="/js/libs/ui/gumby.navbar.js"></script><script defer="defer"  src="/js/libs/ui/gumby.retina.js"></script><script defer="defer"  src="/js/libs/ui/gumby.skiplink.js"></script><script defer="defer"  src="/js/libs/ui/gumby.tabs.js"></script><script defer="defer"  src="/js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer"  src="/js/libs/gumby.init.js"></script><script defer="defer"  src="/js/plugins.js"></script><script defer="defer"  src="/js/main.js"></script>
+
+</body>
+
+</html>
