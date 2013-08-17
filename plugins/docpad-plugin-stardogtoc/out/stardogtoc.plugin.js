@@ -110,20 +110,21 @@
       };
 
       StardogtocPlugin.prototype.buildPages = function() {
-        var chapter, section, _i, _len, _results;
+        var chapter, section, _i, _len, _ref1, _results;
         if (this.built) {
           return;
         }
         this.pages = {};
+        _ref1 = this.config.chapters;
         _results = [];
-        for (_i = 0, _len = chapters.length; _i < _len; _i++) {
-          chapter = chapters[_i];
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          chapter = _ref1[_i];
           _results.push((function() {
-            var _j, _len1, _ref1, _results1;
-            _ref1 = chapter.sections;
+            var _j, _len1, _ref2, _results1;
+            _ref2 = chapter.sections;
             _results1 = [];
-            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-              section = _ref1[_j];
+            for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+              section = _ref2[_j];
               if (!section.page || (this.pages[section.page] != null)) {
                 continue;
               }
@@ -178,26 +179,27 @@
       };
 
       StardogtocPlugin.prototype.buildTocHtml = function() {
-        var ch, chapter, html, section, subsection, text, _i, _j, _k, _len, _len1, _len2, _ref1, _ref2;
+        var ch, chapter, html, section, subsection, text, _i, _j, _k, _len, _len1, _len2, _ref1, _ref2, _ref3;
         this.built = true;
         this.tocHtml = '';
         html = '';
-        for (_i = 0, _len = chapters.length; _i < _len; _i++) {
-          chapter = chapters[_i];
+        _ref1 = this.config.chapters;
+        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+          chapter = _ref1[_i];
           ch = '';
           ch += "<h2>" + chapter.title + "</h2>";
           ch += "<p>" + chapter.subtitle + "</p>";
-          _ref1 = chapter.sections;
-          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-            section = _ref1[_j];
+          _ref2 = chapter.sections;
+          for (_j = 0, _len1 = _ref2.length; _j < _len1; _j++) {
+            section = _ref2[_j];
             ch += "<h3><a href=\"" + section.url + "\">" + section.title + "</a></h3>";
             text = section.text ? section.text : '';
             ch += "<p>" + text + "</p>";
             if (section.subsections && section.subsections.length) {
               ch += "<ol class=\"chapter-toc\">";
-              _ref2 = section.subsections;
-              for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-                subsection = _ref2[_k];
+              _ref3 = section.subsections;
+              for (_k = 0, _len2 = _ref3.length; _k < _len2; _k++) {
+                subsection = _ref3[_k];
                 ch += "<li><a href=\"" + subsection.url + "\">" + subsection.title + "</a></li>";
               }
               ch += "</ol><p></p>";

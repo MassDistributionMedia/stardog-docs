@@ -96,7 +96,7 @@ module.exports = (BasePlugin) ->
 
       @pages = {}
 
-      for chapter in chapters
+      for chapter in @config.chapters
         for section in chapter.sections
           if !section.page || @pages[section.page]? then continue
 
@@ -151,7 +151,7 @@ module.exports = (BasePlugin) ->
 
       html = ''
 
-      for chapter in chapters
+      for chapter in @config.chapters
         ch = ''
         ch += "<h2>#{chapter.title}</h2>"
         ch += "<p>#{chapter.subtitle}</p>"
