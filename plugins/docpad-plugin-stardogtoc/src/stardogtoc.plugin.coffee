@@ -1,7 +1,5 @@
 # Export Plugin
 module.exports = (BasePlugin) ->
-  # Define chapters
-
 
   # Define Plugin
   class StardogtocPlugin extends BasePlugin
@@ -15,7 +13,7 @@ module.exports = (BasePlugin) ->
       subsectionSelector: '#mdblock h2'
       addHeaderIds: true
       headerIdPrefix: 'sd-'
-
+      chapters: null
     buildPages: () ->
       if @built then return
 
