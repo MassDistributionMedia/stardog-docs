@@ -23,5 +23,5 @@
 	"devDependencies": {
 		"coffee-script": "~1.6.2"
 	},
-	"main": "./out/stardogtoc.plugin.js"
+	"main": "./src/stardogtoc.plugin.coffee"
 }
