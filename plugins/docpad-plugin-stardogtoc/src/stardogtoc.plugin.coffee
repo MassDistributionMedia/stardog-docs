@@ -33,7 +33,7 @@ module.exports = (BasePlugin) ->
 
       if !page || page.built || file.attributes.outExtension isnt 'html' then return
 
-      console.log 'buildPage', name
+      #console.log 'buildPage', name
 
       page.built = true
 
