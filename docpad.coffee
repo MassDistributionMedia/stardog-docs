@@ -61,20 +61,20 @@ docpadConfig = {
         site:
             scripts: [
                       "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
-                      "/js/libs/gumby.js"
-                      "/js/libs/ui/gumby.fittext.js"
-                      "/js/libs/ui/gumby.fixed.js"
-                      "/js/libs/ui/gumby.navbar.js"
-                      "/js/libs/ui/gumby.retina.js"
-                      "/js/libs/ui/gumby.skiplink.js"
-                      "/js/libs/ui/gumby.tabs.js"
-                      "/js/libs/ui/gumby.toggleswitch.js"
-                      "/js/libs/gumby.init.js"
-                      "/js/plugins.js"
-                      "/js/main.js"
+                      "js/libs/gumby.js"
+                      "js/libs/ui/gumby.fittext.js"
+                      "js/libs/ui/gumby.fixed.js"
+                      "js/libs/ui/gumby.navbar.js"
+                      "js/libs/ui/gumby.retina.js"
+                      "js/libs/ui/gumby.skiplink.js"
+                      "js/libs/ui/gumby.tabs.js"
+                      "js/libs/ui/gumby.toggleswitch.js"
+                      "js/libs/gumby.init.js"
+                      "js/plugins.js"
+                      "js/main.js"
                       ]
             styles: [
-                      "/css/gumby.css"
+                      "css/gumby.css"
                      ]
             # The production url of our website
             url: "http://docs.stardog.com/"
