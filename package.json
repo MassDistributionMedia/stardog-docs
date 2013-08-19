@@ -1,7 +1,7 @@
 {
-  "name": "no-skeleton.docpad",
+  "name": "docs.stardog.docpad",
   "version": "0.1.0",
-  "description": "New DocPad project without using a skeleton",
+  "description": "Documentation website for StarDog, a semantic database.",
   "engines": {
     "node": ">=0.10",
     "npm": ">=1.2"

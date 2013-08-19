@@ -60,7 +60,8 @@ docpadConfig = {
         FIXME: "<div class='metro large btn warning'>@FIXME</div>"
         site:
             scripts: [
-                      "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+                      "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+                      "//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js",
                       "js/libs/gumby.js"
                       "js/libs/ui/gumby.fittext.js"
                       "js/libs/ui/gumby.fixed.js"
@@ -74,6 +75,8 @@ docpadConfig = {
                       "js/main.js"
                       ]
             styles: [
+                      "//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700"
+                      "//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
                       "css/gumby.css"
                      ]
             # The production url of our website
