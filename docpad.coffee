@@ -76,7 +76,6 @@ docpadConfig = {
                       ]
             styles: [
                       "//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700"
-                      "//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700"
                       "css/gumby.css"
                      ]
             # The production url of our website
