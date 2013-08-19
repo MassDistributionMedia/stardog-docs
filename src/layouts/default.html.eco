@@ -76,7 +76,7 @@
       <section class="row">
         <div class="twelve columns">
             <div class="four columns">
-              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="/img/cp.png"></a>
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="img/cp.png"></a>
               <div> </div>
               <!-- follow us on Twitter -->
             </div>
