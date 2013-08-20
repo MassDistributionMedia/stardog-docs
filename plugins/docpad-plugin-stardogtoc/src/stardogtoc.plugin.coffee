@@ -21,9 +21,12 @@ module.exports = (BasePlugin) ->
 
       for chapter in @config.chapters
         for section in chapter.sections
-          if !section.page || @pages[section.page]? then continue
+          if @pages[section.page]? || (typeof section isnt 'string' && !section.page) then continue
 
-          @pages[section.page] = section
+          if typeof section is 'string'
+            @pages[section] = chapter.sections[chapter.sections.indexOf(section)] = {page:section}
+          else @pages[section.page] = section
+
           section.built = false
 
     buildPage: (file) ->
@@ -37,6 +40,9 @@ module.exports = (BasePlugin) ->
 
       page.built = true
 
+      #console.log 'build', file.attributes
+
+      page.title = file.attributes.title
       page.url = file.attributes.url
       page.subsections = []
 
@@ -86,7 +92,7 @@ module.exports = (BasePlugin) ->
 
           ch += "<p>#{text}</p>"
 
-          #console.log 'sec', section
+          console.log 'sec', section
 
           if section.subsections && section.subsections.length
             ch += "<ol class=\"chapter-toc\">"

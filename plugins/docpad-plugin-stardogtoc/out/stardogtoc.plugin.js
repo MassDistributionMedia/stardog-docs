@@ -60,7 +60,6 @@
         if (!page || page.built || file.attributes.outExtension !== 'html') {
           return;
         }
-        console.log('buildPage', name);
         page.built = true;
         page.url = file.attributes.url;
         page.subsections = [];
