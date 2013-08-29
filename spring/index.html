@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Stardog 2.0.0 Docs: Programming with Spring</title>
+  <meta charset="utf-8">
+  <meta name="generator" content="DocPad v6.50.1">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700"><link rel="stylesheet" href="css/gumby.css">
+  <!--     //a block for ipad, etc... might should go in meta -->
+  </head>
+
+<body>
+<!--
+  <div class="" id="the-content">
+    <div class="wrapper shaded" id="topblock">
+    <div class="row">
+      <div class="four columns">
+        <a href="/"><img class="resrc" src="http://app.resrc.it/S=H55/R=L/http://docs.stardog.com/img/logotype.png"/></a>
+      </div>
+      <div class="eight columns">
+        
+      </div>
+    </div>
+  </div>
+-->
+<div id="page-wrap">
+ <div id="the-content">
+  <div id="theborder" class="wrapper">
+    <!-- full bleed top border styling.... -->
+      <div class="twelve columns"></div>
+  </div>
+
+    <div class="row">
+        <div class="four columns stretch-container" id="sidebar1">
+          <nav id="sidebar-nav-holder" class="fixed vertical-nav stretch-y" gumby-fixed="top">
+            <img id="thelogo" src="http://docs.stardog.com/img/sd.png">
+            
+              
+
+<ol class="toc">
+    
+</ol>
+
+              <p id="tocnav">
+              
+                <a class="iconlinks" href="/"><i style="padding-left:0px; margin-left:0px;" class="icon-home iconlinks"></i></a>&nbsp;
+              
+              <a href="#" id="" class="skip iconlinks" gumby-easing="easeInOutQuad" gumby-goto="top" gumby-duration="2000">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-publish iconlinks"></i>
+              </a> &nbsp;
+              <a href="https://twitter.com/stardog_db" class="iconlinks">
+                <i style="padding-left:0px; margin-left:0px;" class="icon-twitter iconlinks"></i>
+              </a>
+              </p>
+            
+          </nav>
+        </div>
+
+        <div class="eight columns">
+          <!-- woof! -->
+            <div class="row">
+              <p id="quote"><em><strong>It goes against the grain of modern education to teach children to program. What fun is there in making plans, acquiring discipline in organizing thoughts, devoting attention to detail and learning to be self-critical?</strong></em>&mdash;Alan Perlis, <cite>Epigrams in Programming</cite></p>
+              <div class="pull_left"><h1 id="title-subhead">Programming with Spring</h1></div>
+            </div>
+          <!-- summary -->
+          
+            <p id="summary"><em>Spring is a platform to build and run enterprise applications in Java. Stardog's Spring support makes life easier for enterprise developers who need to work with Semantic Web technology&mdash;including RDF, SPARQL, and OWL&mdash;by way of Stardog.</em></p>
+          
+          <div id="mdblock">
+            <p>The Spring for Stardog <a href="http://github.com/clarkparsia/stardog-spring">source code</a> is available on Github. </p>
+<h2 id="sd-Overview">Overview</h2>
+<p>Spring for Stardog makes it possible to rapidly build Stardog-backed applications with the Spring Framework. As with many other parts of Spring, Stardog&#39;s Spring
+integration uses the template design pattern for abstracting standard
+boilerplate away from application developers.</p>
+<p>At the lowest level, Spring for Stardog includes</p>
+<ol>
+<li><code>DataSouce</code> and <code>DataSourceFactoryBean</code> for managing Stardog
+connections</li>
+<li><code>SnarlTemplate</code> for transaction- and connection-pool safe Stardog
+programming</li>
+<li><code>DataImporter</code> for easy bootstrapping of input data into Stardog</li>
+</ol>
+<p>In addition to the core capabilities, Spring for Stardog also integrates
+with the Spring Batch framework. Spring Batch enables complex batch
+processing jobs to be created to accomplish tasks such as ETL or legacy
+data migration. The standard ItemReader and ItemWriter interfaces are
+implemented with a separate callback writing records using the SNARL
+Adder API.</p>
+<p>Future releases of Spring for Stardog will address other command
+enterprise capabilities: Spring Integration, Spring Data, etc.</p>
+<h2 id="sd-Building-Spring-for-Stardog">Building Spring for Stardog</h2>
+<p>To build Spring for Stardog, you need a release of Stardog; we use
+<a href="http://www.gradle.org/">Gradle</a> to build Stardog for Spring. Then,</p>
+<ul>
+<li>edit <code>build.gradle</code> to point <code>stardogLocation</code> at a Stardog release
+directory;</li>
+<li>run <code>gradlew</code>, which will download and bootstrap a gradle build
+environment;</li>
+<li>then run <code>gradlew build</code>, which eventually results in a
+<code>stardog-spring.jar</code> in <code>build/libs</code>; finally,</li>
+<li><code>gradlew install</code> does a build, generates a POM, and installs the
+POM in local Maven repo; alternately,</li>
+<li><p><code>mvn install</code> will work, too:</p>
+<pre><code>mvn install:install-file
+      -DgroupId=com.clarkparsia.stardog
+      -DartifactId=stardog-spring
+      -Dversion=1.1.1
+      -Dfile=stardog-spring.jar
+      -Dpackaging=jar
+      -DpomFile=pom.xml</code></pre>
+</li>
+</ul>
+<h2 id="sd-Basic-Spring">Basic Spring</h2>
+<p>There are three Beans to add to a Spring application context:</p>
+<ul>
+<li><code>DataSourceFactoryBean</code>: <code>com.clarkparsia.stardog.ext.spring.DataSourceFactoryBean</code></li>
+<li><code>SnarlTemplate</code>: <code>com.clarkparsia.stardog.ext.spring.SnarlTemplate</code></li>
+<li><code>DataImporter</code>: <code>com.clarkparsia.stardog.ext.spring.DataImporter</code></li>
+</ul>
+<p><code>DataSourceFactoryBean</code> is a Spring <code>FactoryBean</code> that configures and
+produces a <code>DataSource</code>. All of the Stardog <code>ConnectionConfiguration</code>
+and <code>ConnectionPoolConfig</code> methods are also property names of the
+<code>DataSourceFactoryBean</code>--for example, &quot;to&quot;, &quot;url&quot;, &quot;createIfNotPresent&quot;.</p>
+<p><code>DataSource</code> is a Spring for Stardog class, similar to
+<code>javax.sql.DataSource</code>, that can be used to retrieve a <code>Connection</code> from
+the <code>ConnectionPool</code>. This additional abstraction serves as place to add
+Spring-specific capabilities (e.g. <code>spring-tx</code> support in the future)
+without directly requiring Spring in Stardog.</p>
+<p><code>SnarlTemplate</code> provides a template abstraction over much of Stardog&#39;s
+native API, <a href="/java">SNARL</a>, and follows the same approach of other
+Spring template, i.e., <code>JdbcTemplate</code>, <code>JmsTemplate</code>, and so on.</p>
+<p>Spring for Stardog also comes with convenience mappers, for
+automatically mapping result set bindings into common data types. The
+<code>SimpleRowMapper</code> projects the <code>BindingSet</code> as a <code>List&gt;</code> and a
+<code>SingleMapper</code> that accepts a constructor parameter for binding a single
+parameter for a single result set.</p>
+<p>For example,</p>
+<p>The key methods on <code>SnarlTemplate</code> include the following:</p>
+<pre><code>query(String sparqlQuery, Map args, RowMapper)</code></pre>
+<p><code>query()</code> executes the SELECT query with provided argument list, and
+invokes the mapper for result rows.</p>
+<pre><code>doWithAdder(AdderCallback)</code></pre>
+<p><code>doWithAdder()</code> is a transaction- and connection-pool safe adder call.</p>
+<pre><code>doWithGetter(String subject, String predicate, GetterCallback)</code></pre>
+<p><code>doWithGetter()</code> is the connection pool boilerplate method for the
+<code>Getter</code> interface, including the programmatic filters.</p>
+<pre><code>doWithRemover(RemoverCallback)</code></pre>
+<p><code>doWithRemover()</code> As above, the remover method that is transaction and
+pool safe.</p>
+<pre><code>execute(ConnectionCallback)</code></pre>
+<p><code>execute()</code> lets you work with a connection directly; again, transaction
+and pool safe.</p>
+<pre><code>construct(String constructSparql, Map args, GraphMapper)</code></pre>
+<p><code>construct()</code> executes a SPARQL CONSTRUCT query with provided argument
+list, and invokes the <code>GraphMapper</code> for the result set.</p>
+<p><code>DataImporter</code> is a new class that automates the loading of RDF files
+into Stardog at initialization time.</p>
+<p>It uses the Spring Resource API, so files can be loaded anywhere that is
+resolvable by the Resource API: classpath, file, url, etc. It has a
+single load method for further run-time loading and can load a list of
+files at initialization time. The list assumes a uniform set of file
+formats, so if there are many different types of files to load with
+different RDF formats, there would be different <code>DataImporter</code> beans
+configured in Spring.</p>
+<p>Here&#39;s a sample <code>applicationContext</code>:</p>
+<h2 id="sd-Spring-Batch">Spring Batch</h2>
+<p>In addition to the base <code>DataSource</code> and <code>SnarlTemplate</code>, Spring Batch
+support adds the following:</p>
+<ul>
+<li><code>SnarlItemReader</code>:
+<code>com.clarkparsia.stardog.ext.spring.batch.SnarlItemReader</code></li>
+<li><code>SnarlItemWriter</code>:
+<code>com.clarkparsia.stardog.ext.spring.batch.SnarlItemWriter</code></li>
+<li><code>BatchAdderCallback</code>:
+<code>com.clarkparsia.stardog.ext.spring.batch.BatchAdderCallback</code></li>
+</ul>
+<p>These beans can then be used within Spring Batch job definition, for
+example:</p>
+<h2 id="sd-Examples">Examples</h2>
+<h3>query() with SELECT queries</h3>
+<h3>doWithGetter</h3>
+<h3>doWithAdder</h3>
+<h3>doWithRemover</h3>
+<h3>construct()</h3>
+
+          </div>
+          <div class="hidden" id="footnote-container">
+            <h2>Notes</h2>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="wrapper shaded" id="subfoot">
+      <section class="row">
+        <div class="twelve columns">
+            <div class="four columns">
+              <a style="text-decoration: none; border-bottom: 0;" href="http://clarkparsia.com/"><img id="footer-logo" style="max-width: 50%;" src="img/cp.png"></a>
+              <div> </div>
+              <!-- follow us on Twitter -->
+            </div>
+            <div class="eight columns">
+              
+                <h4>This is <span id="footer-subhead">Programming with Spring</span>, part of <a href="http://docs.stardog.com/">Stardog Docs</a> 2.0.0.</h4>
+              
+              <p class="copywood">For comments, questions, or to report problems with this page, visit the <a href="https://groups.google.com/a/clarkparsia.com/group/stardog/about">Stardog Support Forum</a>.</p>
+              <p class="copywood">&copy;2010&ndash;2013 Clark &amp; Parsia LLC. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>.
+            </p></div>
+        </div>
+      </section>
+</div>
+
+<script defer="defer" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script><script defer="defer" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script><script defer="defer" src="js/libs/gumby.js"></script><script defer="defer" src="js/libs/ui/gumby.fittext.js"></script><script defer="defer" src="js/libs/ui/gumby.fixed.js"></script><script defer="defer" src="js/libs/ui/gumby.navbar.js"></script><script defer="defer" src="js/libs/ui/gumby.retina.js"></script><script defer="defer" src="js/libs/ui/gumby.skiplink.js"></script><script defer="defer" src="js/libs/ui/gumby.tabs.js"></script><script defer="defer" src="js/libs/ui/gumby.toggleswitch.js"></script><script defer="defer" src="js/libs/gumby.init.js"></script><script defer="defer" src="js/plugins.js"></script><script defer="defer" src="js/main.js"></script>
+
+</body>
+
+</html>
