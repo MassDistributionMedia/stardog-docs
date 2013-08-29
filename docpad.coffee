@@ -127,16 +127,13 @@ docpadConfig = {
 
     # Enabled Plugins
     enabledPlugins:  # example
-        # Disable the Pokemon Plugin
-        pokemon: false
-        footnotes: true
+        footnotesbak: false
         highlightjs: false
-        # Enable the Digimon Plugin
         # Unless, enableUnlistedPlugins is set to false, all plugins are enabled by default
-        digimon: true
         frontmatter: false
         tableofcontents: false
         nodesass: false
+        stardogtoc: false
 
     # Configure Plugins
     # Should contain the plugin short names on the left, and the configuration to pass the plugin on the right
@@ -157,7 +154,7 @@ docpadConfig = {
             sassPath: 'E:\Ruby200-x64\bin\sass.bat'
             scssPath: 'E:\Ruby200-x64\bin\scss.bat'
             compass: 'E:\Ruby200-x64\bin\compass.bat'
-        stardogtoc:
+        footnotes:
           chapters: [
             title: "Using Stardog"
             subtitle: "Covers basic installation and starting a Stardog Server in <em>five easy steps</em>."

@@ -43,5 +43,5 @@ Halaschek-Wiener, Gavin Carothers, Brian Panulla, Ryan Kohl, Morton
 Swimmer, Quentin Reul, Paul Dlug, James Leigh, Alex Tucker, Ron
 Zettlemoyer, Jim Rhyne, Andrea Westerinen, Huy Phan, Zach Whitley, Maurice Rabb.</fn> so far.
 
-TOC:Stardog
-<toc:stardog></toc:stardog>
+<!-- TOC:Stardog -->
+<toc:footnotes></toc:footnotes>
